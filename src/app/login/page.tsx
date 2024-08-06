@@ -1,27 +1,55 @@
+"use client";
+
+import React from "react";
+
 export default function Login() {
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    const form = new FormData(e.currentTarget);
+    console.log(form.get("email"));
+    console.log(form.get("password"));
+  };
+
   return (
-    <main className="w-screen h-screen p-24">
-      <div className="flex flex-col justify-center items-center w-full h-full">
-        <form className="bg-green-200 border-2 border-black w-1/3 h-2/3 flex flex-col items-center p-12">
+    <main className="w-screen h-screen p-24 flex justify-center items-center">
+      <div className="flex flex-col bg-green-200 border-2 border-black p-12 items-center">
+        <form onSubmit={handleSubmit} className="flex flex-col items-center">
           <h1 className="font-bold">Login</h1>
-          <div className="flex flex-col my-8">
-            <label htmlFor="username">Username</label>
+          <div className="flex flex-col my-8 w-56">
+            <label htmlFor="email">Email</label>
             <input
-              id="username"
+              id="email"
+              name="email"
               type="text"
+              autoComplete="email"
+              placeholder="Enter your email"
+              required
               className="border-2 border-black p-1 outline-none"
             />
           </div>
-          <div className="flex flex-col mb-16">
+          <div className="flex flex-col mb-8 w-56">
             <label htmlFor="password">Password</label>
             <input
               id="password"
+              name="password"
               type="password"
+              autoComplete="current-password"
+              placeholder="Enter your password"
+              required
               className="border-2 border-black p-1 outline-none"
             />
           </div>
-          <span className="w-full h-[2px] bg-black"></span>
+          <button
+            type="submit"
+            className="bg-white border-2 border-black py-2 px-4"
+          >
+            Login
+          </button>
         </form>
+
+        <span className="w-full h-[2px] bg-black my-16"></span>
+
+        <button className="border-2 border-white bg-black text-white w-fit py-2 px-4">Login with Google</button>
       </div>
     </main>
   );

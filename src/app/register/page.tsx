@@ -1,20 +1,31 @@
 "use client";
 
-import React, { FormEvent } from "react";
+import React, { FormEvent, useState } from "react";
 
-export default function Login() {
+export default function Register() {
+
+  const [error, setError] = useState("");
+
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
-    console.log(form.get("email"));
-    console.log(form.get("password"));
+    const email = form.get("email");
+    const password = form.get("password");
+    const confirmPassword = form.get("confirm-password");
+
+    setError("");
+    if(password !== confirmPassword) {
+      setError("passwords don't match");
+      return;
+    }
   };
 
   return (
     <main className="w-screen h-screen p-24 flex justify-center items-center">
-      <div className="flex flex-col bg-green-200 border-2 border-black p-12 items-center">
+      <div className="relative flex flex-col bg-green-200 border-2 border-black p-12 items-center">
         <form onSubmit={handleSubmit} className="flex flex-col items-center">
-          <h1 className="font-bold">Login</h1>
+          <h1 className="font-bold">Register</h1>
           <div className="flex flex-col my-8 w-56">
             <label htmlFor="email">Email</label>
             <input
@@ -33,8 +44,18 @@ export default function Login() {
               id="password"
               name="password"
               type="password"
-              autoComplete="current-password"
-              placeholder="Enter your password"
+              placeholder="Enter a password"
+              required
+              className="border-2 border-black p-1 outline-none"
+            />
+          </div>
+          <div className="flex flex-col mb-8 w-56">
+            <label htmlFor="password">Confirm Password</label>
+            <input
+              id="confirm-password"
+              name="confirm-password"
+              type="password"
+              placeholder="Confirm password"
               required
               className="border-2 border-black p-1 outline-none"
             />
@@ -43,13 +64,11 @@ export default function Login() {
             type="submit"
             className="bg-white border-2 border-black py-2 px-4"
           >
-            Login
+            Register
           </button>
         </form>
 
-        <span className="w-full h-[2px] bg-black my-16"></span>
-
-        <button className="border-2 border-white bg-black text-white w-fit py-2 px-4">Login with Google</button>
+        <span className="text-red text-xs text-red-500 absolute bottom-2">{error}</span>
       </div>
     </main>
   );

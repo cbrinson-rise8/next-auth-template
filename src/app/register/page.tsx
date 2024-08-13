@@ -45,6 +45,7 @@ export default function Register() {
               name="password"
               type="password"
               placeholder="Enter a password"
+              autoComplete="new-password"
               required
               className="border-2 border-black p-1 outline-none"
             />
@@ -56,6 +57,7 @@ export default function Register() {
               name="confirm-password"
               type="password"
               placeholder="Confirm password"
+              autoComplete="new-password"
               required
               className="border-2 border-black p-1 outline-none"
             />

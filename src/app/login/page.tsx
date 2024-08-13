@@ -6,8 +6,6 @@ export default function Login() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
-    console.log(form.get("email"));
-    console.log(form.get("password"));
   };
 
   return (

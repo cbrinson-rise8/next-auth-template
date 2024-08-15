@@ -1,11 +1,16 @@
 "use client";
 
 import React, { FormEvent } from "react";
+import { signIn } from "../../../auth";
 
 export default function Login() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
+  };
+
+  const handleSignInWithGoogle = async () => {
+    await signIn("google");
   };
 
   return (
@@ -47,7 +52,12 @@ export default function Login() {
 
         <span className="w-full h-[2px] bg-black my-16"></span>
 
-        <button className="border-2 border-white bg-black text-white w-fit py-2 px-4">Login with Google</button>
+        <button
+          onClick={handleSignInWithGoogle}
+          className="border-2 border-white bg-black text-white w-fit py-2 px-4"
+        >
+          Login with Google
+        </button>
       </div>
     </main>
   );
